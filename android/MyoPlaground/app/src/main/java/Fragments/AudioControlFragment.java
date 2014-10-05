@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -30,13 +31,16 @@ import DataObjects.MyoAudioState;
 public class AudioControlFragment extends Fragment
 {
     private static final int REQUEST_ENABLE_BT = 1;
+    AudioManager am;
 
     TextView txtAudioStatus;
-    AudioManager am;
+    TextView txtInputActive;
+    TextView txtVolumeMode;
+    TextView txtArmRotation;
 
     public AudioControlFragment()
     {
-        am = (AudioManager) getActivity().getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+        // Empty constructor
     }
 
     @Override
@@ -46,6 +50,9 @@ public class AudioControlFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_audio_control, container, false);
 
         txtAudioStatus = (TextView) view.findViewById(R.id.txt_audio_status);
+        txtInputActive = (TextView) view.findViewById(R.id.txt_audio_controller_active);
+        txtVolumeMode = (TextView) view.findViewById(R.id.txt_volume_mode);
+        txtArmRotation = (TextView) view.findViewById(R.id.txt_arm_rotation);
 
         return view;
     }
@@ -55,6 +62,9 @@ public class AudioControlFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         Hub.getInstance().addListener(mAudioListener);
+
+        Activity a = getActivity();
+        am = (AudioManager) a.getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
@@ -84,17 +94,7 @@ public class AudioControlFragment extends Fragment
         {
             // Assume only one connected at any given time
             Myo.ConnectionState connectionState = myoList.get(0).getConnectionState();
-
-            if (connectionState == Myo.ConnectionState.CONNECTED)
-            {
-                txtAudioStatus.setTextColor(getResources().getColor(R.color.green));
-                txtAudioStatus.setText(getResources().getString(R.string.text_response_recognized));
-            }
-            else
-            {
-                txtAudioStatus.setTextColor(getResources().getColor(R.color.red));
-                txtAudioStatus.setText(getResources().getString(R.string.text_response_not_recognized));
-            }
+            setDataFieldsReady(connectionState == Myo.ConnectionState.CONNECTED);
         }
     }
 
@@ -115,6 +115,39 @@ public class AudioControlFragment extends Fragment
     {
         Hub.getInstance().removeListener(mAudioListener);
         super.onDestroy();
+    }
+
+    public void setDataFieldsReady(boolean ready)
+    {
+        if (ready)
+        {
+            txtAudioStatus.setTextColor(getResources().getColor(R.color.green));
+            txtAudioStatus.setText(getResources().getString(R.string.text_response_recognized));
+
+            txtInputActive.setText("FALSE");
+            txtVolumeMode.setText("FALSE");
+            txtArmRotation.setText("");
+        }
+        else
+        {
+            txtAudioStatus.setTextColor(getResources().getColor(R.color.red));
+            txtAudioStatus.setText(getResources().getString(R.string.text_response_not_recognized));
+
+            txtInputActive.setText("");
+            txtVolumeMode.setText("");
+            txtArmRotation.setText("");
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // User chose not to enable Bluetooth, so exit.
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity().getBaseContext(), "Bluetooth not enabled. Exiting...", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     // Listeners
@@ -140,8 +173,7 @@ public class AudioControlFragment extends Fragment
         public void onDisconnect(Myo myo, long l)
         {
             Toast.makeText(getActivity().getBaseContext(), "Disconnected from Myo!", Toast.LENGTH_SHORT).show();
-            txtAudioStatus.setTextColor(getResources().getColor(R.color.red));
-            txtAudioStatus.setText(getResources().getString(R.string.text_response_not_recognized));
+            setDataFieldsReady(false);
 
             audioState.resetState();
         }
@@ -149,8 +181,7 @@ public class AudioControlFragment extends Fragment
         @Override
         public void onArmRecognized(Myo myo, long l, Arm arm, XDirection xDirection)
         {
-            txtAudioStatus.setTextColor(getResources().getColor(R.color.green));
-            txtAudioStatus.setText(getResources().getString(R.string.text_response_recognized));
+            setDataFieldsReady(true);
 
             audioState.pose = Pose.UNKNOWN;
             audioState.actionState = MyoAudioState.MyoActionState.INACTIVE;
@@ -161,8 +192,7 @@ public class AudioControlFragment extends Fragment
         @Override
         public void onArmLost(Myo myo, long l)
         {
-            txtAudioStatus.setTextColor(getResources().getColor(R.color.red));
-            txtAudioStatus.setText(getResources().getString(R.string.text_response_not_recognized));
+            setDataFieldsReady(false);
 
             audioState.resetState();
         }
@@ -176,6 +206,7 @@ public class AudioControlFragment extends Fragment
             }
 
             audioState.pose = pose;
+            txtAudioStatus.setText("Pose: " + audioState.pose.name());
 
             if (!audioState.readyForInput())
             {
@@ -184,6 +215,7 @@ public class AudioControlFragment extends Fragment
                 {
                     audioState.actionState = MyoAudioState.MyoActionState.ACTIVE;
                     audioState.finishedAction = false;
+                    txtInputActive.setText("TRUE");
                     myo.vibrate(Myo.VibrationType.SHORT);
                 }
             }
@@ -207,6 +239,7 @@ public class AudioControlFragment extends Fragment
                     case FIST:
                         // TODO: Enter Volume mode
                         audioState.volumeMode = true;
+                        txtVolumeMode.setText("TRUE");
                         break;
                     case THUMB_TO_PINKY:
                         audioState.actionState = MyoAudioState.MyoActionState.INACTIVE;
@@ -218,6 +251,13 @@ public class AudioControlFragment extends Fragment
                     default:
                         break;
                 }
+
+                if (audioState.finishedAction)
+                {
+                    txtInputActive.setText("FALSE");
+                    txtVolumeMode.setText("FALSE");
+                    txtArmRotation.setText("");
+                }
             }
             else
             {
@@ -225,6 +265,10 @@ public class AudioControlFragment extends Fragment
                 audioState.actionState = MyoAudioState.MyoActionState.INACTIVE;
                 audioState.finishedAction = true;
                 audioState.volumeMode = false;
+
+                txtInputActive.setText("FALSE");
+                txtVolumeMode.setText("FALSE");
+                txtArmRotation.setText("");
             }
         }
 
@@ -233,13 +277,29 @@ public class AudioControlFragment extends Fragment
         {
             if (audioState.brokenConnection() || !audioState.volumeMode)
             {
+                audioState.refRoll = Quaternion.roll(quaternion);
                 return;
             }
 
             // We are now in a fist in active mode. Adjust music volume as needed.
-            // TODO: Track Orientation for volume
-            //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0);
-            //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0);
+
+            double newRoll = Quaternion.roll(quaternion);
+            double rollDelta = newRoll - audioState.refRoll;
+            txtArmRotation.setText(String.format("%1.3f", rollDelta));
+
+            if (Math.abs(rollDelta) > 0.15 && am != null)
+            {
+                audioState.refRoll = newRoll;
+
+                if (rollDelta > 0)
+                {
+                    am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0);
+                }
+                else
+                {
+                    am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0);
+                }
+            }
         }
 
         @Override

@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
@@ -161,6 +162,17 @@ public class TextResponseFragment extends Fragment
     {
         Hub.getInstance().removeListener(mTextResponseListener);
         super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // User chose not to enable Bluetooth, so exit.
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(getActivity().getBaseContext(), "Bluetooth not enabled. Exiting...", Toast.LENGTH_SHORT).show();
+            getActivity().finish();
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void setDataContainersReady(boolean ready)

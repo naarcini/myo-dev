@@ -46,7 +46,9 @@
 
     <!-- Myo Audio Controller Strings -->
     <string name="audio_controller_title">Audio Controller</string>
-    <string name="audio_controller_rotating">Arm rotation:</string>
+    <string name="audio_controller_rotation">Arm rotation: </string>
+    <string name="audio_controller_active">Input active: </string>
+    <string name="audio_controller_volume_mode">Volume Mode: </string>
 
     <!-- Colors -->
     <color name="gray">#AAAAAA</color>

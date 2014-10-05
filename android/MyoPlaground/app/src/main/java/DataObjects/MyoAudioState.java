@@ -13,6 +13,7 @@ public class MyoAudioState
     public Pose pose;
     public Arm arm;
     public XDirection direction;
+    public double refRoll;
 
     public boolean finishedAction;
     public boolean volumeMode;
@@ -37,6 +38,7 @@ public class MyoAudioState
         direction = XDirection.UNKNOWN;
         finishedAction = false;
         volumeMode = false;
+        refRoll = 0.0;
     }
 
     public boolean readyForInput()

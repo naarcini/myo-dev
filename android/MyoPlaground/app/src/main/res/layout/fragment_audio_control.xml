@@ -27,4 +27,88 @@
         android:textSize="@dimen/secondary_title_text_size"
         android:text="@string/text_response_not_recognized" />
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="end"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text="@string/audio_controller_active"/>
+
+            <TextView
+                android:id="@+id/txt_audio_controller_active"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="start"
+                android:textStyle="italic"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text=""/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="end"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text="@string/audio_controller_volume_mode"/>
+
+            <TextView
+                android:id="@+id/txt_volume_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="start"
+                android:textStyle="italic"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text=""/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="end"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text="@string/audio_controller_rotation"/>
+
+            <TextView
+                android:id="@+id/txt_arm_rotation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:gravity="start"
+                android:textStyle="italic"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text=""/>
+
+        </TableRow>
+
+    </TableLayout>
+
 </LinearLayout>

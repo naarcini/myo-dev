@@ -16,15 +16,13 @@ import Fragments.MenuFragment;
 
 public class MainActivity extends Activity
 {
-    Hub hub;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        hub = hub.getInstance();
+        Hub hub = Hub.getInstance();
         if (!hub.init(this))
         {
             Toast.makeText(this, "Could not initialize the Hub.", Toast.LENGTH_LONG).show();
