@@ -21,4 +21,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    repositories {
+        maven {
+            url '../../../sdk/myo-android-sdk-0.6.0/myorepository'
+        }
+    }
+
+    compile('com.thalmic:myosdk:0.6.+@aar')
 }

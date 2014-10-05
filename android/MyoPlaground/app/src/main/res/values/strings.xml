@@ -19,19 +19,16 @@
 
     <!-- Myo Text Response Strings -->
     <string name="text_response_title">Text Response Tool</string>
-    <string name="gesture_fist">Fist</string>
-    <string name="gesture_flat_spread">Flat hand spread</string>
-    <string name="gesture_flip_next">Flip next</string>
-    <string name="gesture_flip_previous">Flip previous</string>
-    <string name="gesture_rotate_clockwise">Rotate clockwise</string>
-    <string name="gesture_rotate_counterclockwise">Rotate counterclockwise</string>
-    <string name="gesture_stop">Stop</string>
-    <string name="gesture_chop">Karate chop!</string>
+    <string name="text_response_recognized">Arm Recognized!</string>
+    <string name="text_response_not_recognized">Waiting for arm sync...</string>
 
     <!-- Myo Audio Controller Strings -->
     <string name="audio_controller_title">Audio Controller</string>
+    <string name="audio_controller_rotating">Arm rotation:</string>
 
     <!-- Colors -->
     <color name="gray">#AAAAAA</color>
+    <color name="red">#E10000</color>
+    <color name="green">#1C9800</color>
 
 </resources>

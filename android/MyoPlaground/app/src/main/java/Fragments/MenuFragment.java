@@ -73,22 +73,18 @@ public class MenuFragment extends Fragment
         @Override
         public void onItemClick(AdapterView adapterView, View view, int position, long id)
         {
-//            Toast.makeText(getActivity().getBaseContext(), "Click" + Integer.toString(position), Toast.LENGTH_SHORT).show();
-
             FragmentManager manager = getActivity().getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
 
             switch (position)
             {
                 case 0:
-                    Toast.makeText(getActivity().getBaseContext(), "Click" + Integer.toString(position), Toast.LENGTH_SHORT).show();
                     TextResponseFragment textResponseFragment = new TextResponseFragment();
                     transaction.replace(R.id.app_container, textResponseFragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
                     break;
                 case 1:
-                    Toast.makeText(getActivity().getBaseContext(), "Click" + Integer.toString(position), Toast.LENGTH_SHORT).show();
                     AudioControlFragment audioControlFragment = new AudioControlFragment();
                     transaction.replace(R.id.app_container, audioControlFragment);
                     transaction.addToBackStack(null);

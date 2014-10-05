@@ -18,7 +18,20 @@
         </activity>
     </application>
 
+    // Required for communicating with the Myo device
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    // Required for sending usage data to Thalmic Labs
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    // Required for saving Myo settings and other data
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    // Required for adjusting audio
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <uses-sdk android:minSdkVersion="16" />
 
 </manifest>

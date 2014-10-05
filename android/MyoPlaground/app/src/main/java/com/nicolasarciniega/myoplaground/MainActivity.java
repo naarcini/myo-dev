@@ -7,17 +7,30 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.thalmic.myo.Hub;
 
 import Fragments.MenuFragment;
 
 
 public class MainActivity extends Activity
 {
+    Hub hub;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        hub = hub.getInstance();
+        if (!hub.init(this))
+        {
+            Toast.makeText(this, "Could not initialize the Hub.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -27,11 +40,15 @@ public class MainActivity extends Activity
 
     }
 
-//    @Override
-//    public void onBackPressed()
-//    {
-//
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (isFinishing()) {
+            // The Activity is finishing, so shutdown the Hub. This will disconnect from the Myo.
+            Hub.getInstance().shutdown();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

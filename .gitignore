@@ -37,3 +37,6 @@ proguard/
 .AppleDesktop
 Network Trash Folder
 Temporary Items
+
+# VIM Ignores #
+*.swp
