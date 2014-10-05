@@ -20,7 +20,29 @@
     <!-- Myo Text Response Strings -->
     <string name="text_response_title">Text Response Tool</string>
     <string name="text_response_recognized">Arm Recognized!</string>
-    <string name="text_response_not_recognized">Waiting for arm sync...</string>
+    <string name="text_response_not_recognized">Waiting for arm sync…</string>
+
+    <string name="text_response_arm">Arm: </string>
+    <string name="text_response_xdirection">XDirection: </string>
+
+    <string name="text_response_quaternion_title"><u>Quaternion</u></string>
+    <string name="text_response_quaternion_coordinates">Coordinates…</string>
+    <string name="text_response_coordinate_x">X: </string>
+    <string name="text_response_coordinate_y">Y: </string>
+    <string name="text_response_coordinate_z">Z: </string>
+    <string name="text_response_coordinate_w">W: </string>
+    <string name="text_response_coordinate_length">length: </string>
+    <string name="text_response_quaternion_calculated">Calculated values…</string>
+    <string name="text_response_quaternion_roll">roll: </string>
+    <string name="text_response_quaternion_pitch">pitch: </string>
+    <string name="text_response_quaternion_yaw">yaw: </string>
+    
+    <string name="text_response_acceleration_title"><u>Acceleration</u></string>
+
+    <string name="text_response_gyroscope_title"><u>Gyroscope</u></string>
+
+    <string name="text_response_rssi_title"><u>RSSI</u></string>
+    <string name="text_response_rssi_strength">Signal strength:</string>
 
     <!-- Myo Audio Controller Strings -->
     <string name="audio_controller_title">Audio Controller</string>

@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="Fragments.TextResponseFragment">
 
@@ -9,7 +13,6 @@
         android:id="@+id/txt_text_response_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center_horizontal"
         android:textSize="@dimen/header_text_size"
@@ -19,10 +22,500 @@
         android:id="@+id/txt_text_response_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:textColor="@color/red"
         android:textStyle="bold"
         android:textSize="@dimen/secondary_title_text_size"
         android:text="@string/text_response_not_recognized" />
+
+    <ScrollView
+        android:id="@+id/sv_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:visibility="invisible"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_arm"/>
+
+                    <TextView
+                        android:id="@+id/txt_arm_detect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_xdirection"/>
+
+                    <TextView
+                        android:id="@+id/txt_xdirection_detect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="@dimen/secondary_title_text_size"
+                android:text="@string/text_response_quaternion_title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text="@string/text_response_quaternion_coordinates"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_x"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_y"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_y"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_z"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_z"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_w"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_w"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_length"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:textSize="@dimen/secondary_description_text_size"
+                android:text="@string/text_response_quaternion_calculated"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_quaternion_pitch"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_pitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_quaternion_yaw"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_yaw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_quaternion_roll"/>
+
+                    <TextView
+                        android:id="@+id/txt_quaternion_roll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="@dimen/secondary_title_text_size"
+                android:text="@string/text_response_acceleration_title"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_x"/>
+
+                    <TextView
+                        android:id="@+id/txt_acceleration_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_y"/>
+
+                    <TextView
+                        android:id="@+id/txt_acceleration_y"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_z"/>
+
+                    <TextView
+                        android:id="@+id/txt_acceleration_z"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_length"/>
+
+                    <TextView
+                        android:id="@+id/txt_acceleration_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="@dimen/secondary_title_text_size"
+                android:text="@string/text_response_gyroscope_title"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_x"/>
+
+                    <TextView
+                        android:id="@+id/txt_gyroscope_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_y"/>
+
+                    <TextView
+                        android:id="@+id/txt_gyroscope_y"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_z"/>
+
+                    <TextView
+                        android:id="@+id/txt_gyroscope_z"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_coordinate_length"/>
+
+                    <TextView
+                        android:id="@+id/txt_gyroscope_length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="@dimen/secondary_title_text_size"
+                android:text="@string/text_response_rssi_title"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="end"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text="@string/text_response_rssi_strength"/>
+
+                    <TextView
+                        android:id="@+id/txt_rssi_strength"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/table_padding"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/secondary_description_text_size"
+                        android:text=""/>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="Fragments.AudioControlFragment">
 
@@ -9,7 +13,6 @@
         android:id="@+id/txt_text_response_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center_horizontal"
         android:textSize="@dimen/header_text_size"
@@ -19,7 +22,6 @@
         android:id="@+id/txt_audio_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:textColor="@color/red"
         android:textStyle="bold"
         android:textSize="@dimen/secondary_title_text_size"

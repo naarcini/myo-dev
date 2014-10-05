@@ -2,7 +2,9 @@ package Fragments;
 
 import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +23,20 @@ import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.Vector3;
 import com.thalmic.myo.XDirection;
 
+import java.util.ArrayList;
+
 import DataObjects.MyoAudioState;
 
 public class AudioControlFragment extends Fragment
 {
     private static final int REQUEST_ENABLE_BT = 1;
+
     TextView txtAudioStatus;
+    AudioManager am;
 
     public AudioControlFragment()
     {
-        // Required empty public constructor
+        am = (AudioManager) getActivity().getBaseContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
@@ -38,7 +44,6 @@ public class AudioControlFragment extends Fragment
     {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_audio_control, container, false);
-
 
         txtAudioStatus = (TextView) view.findViewById(R.id.txt_audio_status);
 
@@ -63,13 +68,34 @@ public class AudioControlFragment extends Fragment
     {
         super.onResume();
 
-        // If Bluetooth is not enabled, request to turn it on.
-        if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
+        ArrayList<Myo> myoList = Hub.getInstance().getConnectedDevices();
 
-        Hub.getInstance().pairWithAnyMyo();
+        if (myoList.isEmpty())
+        {
+            // If Bluetooth is not enabled, request to turn it on.
+            if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+
+            Hub.getInstance().pairWithAnyMyo();
+        }
+        else
+        {
+            // Assume only one connected at any given time
+            Myo.ConnectionState connectionState = myoList.get(0).getConnectionState();
+
+            if (connectionState == Myo.ConnectionState.CONNECTED)
+            {
+                txtAudioStatus.setTextColor(getResources().getColor(R.color.green));
+                txtAudioStatus.setText(getResources().getString(R.string.text_response_recognized));
+            }
+            else
+            {
+                txtAudioStatus.setTextColor(getResources().getColor(R.color.red));
+                txtAudioStatus.setText(getResources().getString(R.string.text_response_not_recognized));
+            }
+        }
     }
 
     @Override
@@ -157,28 +183,63 @@ public class AudioControlFragment extends Fragment
                 if (pose == Pose.THUMB_TO_PINKY)
                 {
                     audioState.actionState = MyoAudioState.MyoActionState.ACTIVE;
+                    audioState.finishedAction = false;
                     myo.vibrate(Myo.VibrationType.SHORT);
+                }
+            }
+            else if (!audioState.finishedAction && !audioState.volumeMode)
+            {
+                // Perform an action
+                switch (pose)
+                {
+                    case FINGERS_SPREAD:
+                        // TODO: Pause/Start
+                        audioState.finishedAction = true;
+                        break;
+                    case WAVE_IN:
+                        // TODO: Next song
+                        audioState.finishedAction = true;
+                        break;
+                    case WAVE_OUT:
+                        // TODO: Previous song
+                        audioState.finishedAction = true;
+                        break;
+                    case FIST:
+                        // TODO: Enter Volume mode
+                        audioState.volumeMode = true;
+                        break;
+                    case THUMB_TO_PINKY:
+                        audioState.actionState = MyoAudioState.MyoActionState.INACTIVE;
+                        audioState.finishedAction = true;
+                        myo.vibrate(Myo.VibrationType.MEDIUM);
+                        break;
+                    case REST:
+                    case UNKNOWN:
+                    default:
+                        break;
                 }
             }
             else
             {
-                // Perform an action then deactivate
-                audioState.actionState = MyoAudioState.MyoActionState.ACTIVE;
+                // We must have already finished an action, so just deactivate
+                audioState.actionState = MyoAudioState.MyoActionState.INACTIVE;
+                audioState.finishedAction = true;
+                audioState.volumeMode = false;
             }
         }
 
         @Override
         public void onOrientationData(Myo myo, long l, Quaternion quaternion)
         {
-            if (audioState.brokenConnection() || !audioState.readyForInput())
+            if (audioState.brokenConnection() || !audioState.volumeMode)
             {
                 return;
             }
 
-            if (audioState.pose == Pose.FIST)
-            {
-                // TODO: Track Orientation for volume
-            }
+            // We are now in a fist in active mode. Adjust music volume as needed.
+            // TODO: Track Orientation for volume
+            //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0);
+            //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0);
         }
 
         @Override

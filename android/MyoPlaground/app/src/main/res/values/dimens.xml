@@ -7,4 +7,7 @@
     <dimen name="header_text_size">20sp</dimen>
     <dimen name="secondary_title_text_size">16sp</dimen>
     <dimen name="secondary_description_text_size">12sp</dimen>
+
+    <!-- Table dimensions -->
+    <dimen name="table_padding">3dp</dimen>
 </resources>

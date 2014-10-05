@@ -14,6 +14,9 @@ public class MyoAudioState
     public Arm arm;
     public XDirection direction;
 
+    public boolean finishedAction;
+    public boolean volumeMode;
+
     public enum MyoActionState
     {
         UNKNOWN,
@@ -32,6 +35,8 @@ public class MyoAudioState
         pose = Pose.UNKNOWN;
         arm = Arm.UNKNOWN;
         direction = XDirection.UNKNOWN;
+        finishedAction = false;
+        volumeMode = false;
     }
 
     public boolean readyForInput()
