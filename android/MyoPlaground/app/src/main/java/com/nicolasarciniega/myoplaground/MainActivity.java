@@ -1,19 +1,37 @@
 package com.nicolasarciniega.myoplaground;
 
 import android.app.Activity;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import Fragments.MenuFragment;
 
-public class MainActivity extends Activity {
 
+public class MainActivity extends Activity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        MenuFragment menuFragment = new MenuFragment();
+        transaction.add(R.id.app_container, menuFragment);
+        transaction.commit();
+
     }
 
+//    @Override
+//    public void onBackPressed()
+//    {
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyoPlaground</string>
+    <string name="app_name">MyoPlayground</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Menu Strings -->
+    <string name="menu_title">Welcome to MYO Playground!</string>
+    <string-array name="menu_title_array">
+        <item>Text Response</item>
+        <item>Audio Controller</item>
+    </string-array>
+    <string-array name="menu_description_array">
+        <item>See if Myo can recognize your gestures</item>
+        <item>Try controlling system volume with gestures</item>
+    </string-array>
+
+    <!-- Myo Text Response Strings -->
+    <string name="text_response_title">Text Response Tool</string>
+    <string name="gesture_fist">Fist</string>
+    <string name="gesture_flat_spread">Flat hand spread</string>
+    <string name="gesture_flip_next">Flip next</string>
+    <string name="gesture_flip_previous">Flip previous</string>
+    <string name="gesture_rotate_clockwise">Rotate clockwise</string>
+    <string name="gesture_rotate_counterclockwise">Rotate counterclockwise</string>
+    <string name="gesture_stop">Stop</string>
+    <string name="gesture_chop">Karate chop!</string>
+
+    <!-- Myo Audio Controller Strings -->
+    <string name="audio_controller_title">Audio Controller</string>
+
+    <!-- Colors -->
+    <color name="gray">#AAAAAA</color>
 
 </resources>
